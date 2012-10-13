@@ -104,6 +104,7 @@ All the options of the Picker and Picker.Attach classes, and:
 - minDate: (*Date instance*, *string*, defaults to `null`) Minimum date allowed to pick. Blocks anything before.
 - maxDate: (*Date instance*, *string*, defaults to `null`) Maximum date allowed to pick. Blocks anything after.
 - availableDates: (*object*, defaults to `null`) When only a few dates should be selectable. An object like `{2011: {1: [19, 29, 31], 3: [5, 19, 24]}}` with all the dates (year -> months -> days).
+- weekdays: (*object*, defaults to `null`) When only specified days of the week should be selectable. An object like `[1, 2, 4, 5]` with the selectable weekdays.
 - invertAvailable: (*boolean*, defaults to `false`) Invert the `availableDates` option.
 - format: (*string*, defaults to the default localized format) The format to output into the input field. Uses [Date.format](http://mootools.net/docs/more/Types/Date#Date:format)
 - timePicker: (*boolean*, defaults to 1 `false`) Enable/disable timepicker functionality. Hours/Minutes values can be changed using the scrollwheel.

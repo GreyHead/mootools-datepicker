@@ -22,6 +22,7 @@ this.DatePicker = Picker.Date = new Class({
 		maxDate: new Date('3/4/2011'), // same as minDate
 		availableDates: {}, //
 		invertAvailable: false,
+		weekdays: null, // null allows all days, a subset of [0, 1, 2, 3, 4, 5, 6] allows only selected days e.g [0, 6] allows Saturday and Sunday only
 
 		format: null,*/
 
@@ -608,9 +609,12 @@ var isUnavailable = function(type, date, options){
 	var minDate = options.minDate,
 		maxDate = options.maxDate,
 		availableDates = options.availableDates,
+		weekdays = options.weekdays,
 		year, month, day, ms;
-
-	if (!minDate && !maxDate && !availableDates) return false;
+	if ( typeof availableDates == 'undefined' ) {
+		availableDates = null;
+	}
+	if (!minDate && !maxDate && !availableDates && !weekdays) return false;
 	date.clearTime();
 
 	if (type == 'year'){
@@ -653,8 +657,12 @@ var isUnavailable = function(type, date, options){
 	year = date.get('year');
 	month = date.get('month') + 1;
 	day = date.get('date');
+	weekday = date.getDay();
 
 	var dateAllow = (minDate && date < minDate) || (maxDate && date > maxDate);
+	if ( weekdays !== null ) {
+		dateAllow = dateAllow || !weekdays.contains(weekday);
+	}
 	if (availableDates != null){
 		dateAllow = dateAllow
 			|| availableDates[year] == null
